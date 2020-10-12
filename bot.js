@@ -1,12 +1,14 @@
 const Discord = require("discord.js");
 const { config } = require("dotenv");
-const version = '1.0';
+const version = '1.1';
 const fs = require('fs');
 const botSettings = JSON.parse(fs.readFileSync('./botSettings.json'));
 const bot = new Discord.Client({disableEveryone: false});
 bot.commands = new Discord.Collection();
 var prefix = botSettings.prefix;
 config({ path: __dirname + "/.env" });
+var currentGames = [];
+module.exports = currentGames;
 
 fs.readdir("./cmds/", (err) => {
     if (err) console.error(err);
@@ -34,6 +36,33 @@ fs.readdir("./cmds/", (err) => {
             console.log(`> loaded ${jsfiles.length} commands: ${names}`);
         });
     });
+});
+
+bot.on('messageReactionAdd', (reaction, user) => {
+    let message = reaction.message, emoji = reaction.emoji;
+
+    if(user.bot) return;
+
+    if (emoji.name == '⏹️') {
+        //game: [messageId, hostId]
+        currentGames.forEach(game => {
+            if(game[0] === message.id) {
+                if(game[1] === user.id) {
+                    const editEmbed = new Discord.MessageEmbed()
+                    .setColor('#FBD6C6')
+                    .setTitle('Among Us Lobby - hosted by "' + user.username + '"')
+                    .setDescription('This game has ended.')
+                    .setThumbnail(bot.user.avatarURL)
+                    .setTimestamp()
+                    .setFooter('© amongbot 2020', bot.user.avatarURL);
+                    message.edit(editEmbed);
+                    reaction.remove();
+                } else {
+                    message.reactions.resolve(emoji.name).users.remove(user.id);
+                }
+            }
+        }); 
+    }
 });
 
 bot.on('ready', () => {

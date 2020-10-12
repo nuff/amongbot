@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const embeds = require('../../utils/embed.js');
+const main = require('../../bot.js');
 
 module.exports.run = async (bot, msg, args) => {
     var map = "";
@@ -75,10 +76,11 @@ module.exports.run = async (bot, msg, args) => {
             return;
     }
 
+    msg.delete();
+
     const lobbyEmbed = new Discord.MessageEmbed()
 	.setColor('#FBD6C6')
 	.setTitle('Among Us Lobby - hosted by "' + msg.author.username + '"')
-	.setDescription('A list of all commands')
 	.setThumbnail(bot.user.avatarURL)
 	.addFields(
     { name: 'Code', value: '**' + args[0] + '**', inline: true},
@@ -91,7 +93,11 @@ module.exports.run = async (bot, msg, args) => {
 	.setTimestamp()
 	.setFooter('© amongbot 2020', bot.user.avatarURL);
 
-  msg.channel.send(lobbyEmbed);
+  msg.channel.send(lobbyEmbed).then(message => {
+    message.react("⏹️");
+    main.push([message.id, msg.author.id]);
+    console.log(main);
+  });
 };
 
 module.exports.help = {
