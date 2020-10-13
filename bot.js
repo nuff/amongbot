@@ -126,7 +126,8 @@ bot.on('messageReactionAdd', (reaction, user) => {
                     .setTimestamp()
                     .setFooter('© amongbot 2020', bot.user.avatarURL);
                     message.edit(editEmbed);
-                    reaction.remove();
+                    message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+                    game[0] = "0"; //replace messageID
                 } else {
                     message.reactions.resolve(emoji.name).users.remove(user.id);
                 }
