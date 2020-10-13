@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const { config } = require("dotenv");
-const version = '1.1';
+const version = '1.2';
 const fs = require('fs');
 const botSettings = JSON.parse(fs.readFileSync('./botSettings.json'));
 const bot = new Discord.Client({disableEveryone: false});
