@@ -88,15 +88,17 @@ module.exports.run = async (bot, msg, args) => {
     { name: 'Map', value: map },
     { name: 'Impostors', value: args[3] },
     { name: 'Confirm Ejects', value: ejects, inline: true},
-    { name: 'Visual Tasks', value: tasks, inline: true }
+    { name: 'Visual Tasks', value: tasks, inline: true },
+    { name: "Players", value: "⏪➖➖➖➖➖➖➖➖➖➖⏩ (0)"}
 	)
 	.setTimestamp()
 	.setFooter('© amongbot 2020', bot.user.avatarURL);
 
   msg.channel.send(lobbyEmbed).then(message => {
+    message.react("⬆️");
+    message.react("⬇️");
     message.react("⏹️");
-    main.push([message.id, msg.author.id]);
-    console.log(main);
+    main.push([message.id, msg.author.id, 0, args[0], args[1], map, args[3], ejects, tasks]);
   });
 };
 
