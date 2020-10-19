@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const embeds = require('../../utils/embed.js');
-const botjs = require('../../bot.js');
+const botjs = require('../../amongbot.js');
 const currentGames = botjs.currentGames;
 
 module.exports.run = async (bot, msg, args) => {

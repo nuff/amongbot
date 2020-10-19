@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 var jt = require('json-toolkit');
 const embeds = require('../../utils/embed.js');
-const botjs = require('../../bot.js');
+const botjs = require('../../amongbot.js');
 const muteMinions = botjs.muteMinions;
 
 module.exports.run = async (bot, msg, args) => {
