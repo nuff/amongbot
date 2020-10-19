@@ -31,6 +31,6 @@ module.exports.run = async (bot, msg, args) => {
 module.exports.help = {
   name: "unmute",
   arguments: "",
-  description: "",
+  description: "Unmute everyone in the specified Among Us voice channel.",
   category: "regular"
 }

@@ -26,17 +26,18 @@ module.exports.run = async (bot, msg, args) => {
             .setTitle('Mute Minion | summoned by "' + msg.author.username + '"')
             .setThumbnail(bot.user.avatarURL)
             .addFields(
-            { name: '🟥', value: 'Mute', inline: true },
-            { name: "🟩", value: 'Unmute', inline: true}
+            { name: '🔴', value: 'Mute', inline: true },
+            { name: "🟢", value: 'Unmute', inline: true}
             )
             .setTimestamp()
             .setFooter('© amongbot 2020', bot.user.avatarURL);
 
             msg.channel.send(minionEmbed).then(message => {
-                message.react("🟥");
-                message.react("🟩");
+                message.react("🔴");
+                message.react("🟢");
                 message.react("⏹️");
                 muteMinions.push([message.id, msg.author.id]);
+                console.log(muteMinions);
             });
         });
     } catch {
@@ -51,6 +52,6 @@ module.exports.run = async (bot, msg, args) => {
 module.exports.help = {
   name: "muteminion",
   arguments: "",
-  description: "",
+  description: "Create an embed you can use to mute and unmute the voice channel using reactions.",
   category: "regular"
 }

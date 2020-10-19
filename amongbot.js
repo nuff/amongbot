@@ -62,7 +62,7 @@ bot.on('messageReactionAdd', (reaction, user) => {
                         }
                     }
                     const editEmbed = new Discord.MessageEmbed()
-                    .setColor('#FBD6C6')
+                    .setColor('#6cd3eb')
                     .setTitle('Among Us Lobby - hosted by "' + user.username + '"')
                     .setThumbnail(bot.user.avatarURL)
                     .addFields(
@@ -97,7 +97,7 @@ bot.on('messageReactionAdd', (reaction, user) => {
                         }
                     }
                     const editEmbed = new Discord.MessageEmbed()
-                    .setColor('#FBD6C6')
+                    .setColor('#6cd3eb')
                     .setTitle('Among Us Lobby - hosted by "' + user.username + '"')
                     .setThumbnail(bot.user.avatarURL)
                     .addFields(
@@ -118,7 +118,7 @@ bot.on('messageReactionAdd', (reaction, user) => {
         }); 
     }
 
-    if (emoji.name == '🟥') {
+    if (emoji.name == '🔴') {
         muteMinions.forEach(minion => {
             if(minion[0] === message.id) {
                 if(minion[1] === user.id) {
@@ -136,7 +136,7 @@ bot.on('messageReactionAdd', (reaction, user) => {
         });
     }
 
-    if (emoji.name == '🟩') {
+    if (emoji.name == '🟢') {
         muteMinions.forEach(minion => {
             if(minion[0] === message.id) {
                 if(minion[1] === user.id) {
@@ -159,7 +159,7 @@ bot.on('messageReactionAdd', (reaction, user) => {
             if(minion[0] === message.id) {
                 if(minion[1] === user.id) {
                     const minionEmbed = new Discord.MessageEmbed()
-                    .setColor('#FBD6C6')
+                    .setColor('#6cd3eb')
                     .setTitle('Mute Minion | summoned by "' + user.username + '"')
                     .setDescription('This minion has been killed.')
                     .setThumbnail(bot.user.avatarURL)
@@ -170,6 +170,8 @@ bot.on('messageReactionAdd', (reaction, user) => {
                     var newArr = muteMinions.filter(item => item !== minion);
                     muteMinions = newArr;
                     return;
+                } else {
+                    message.reactions.resolve(emoji.name).users.remove(user.id);
                 }
             }
         })
@@ -179,7 +181,7 @@ bot.on('messageReactionAdd', (reaction, user) => {
             if(game[0] === message.id) {
                 if(game[1] === user.id) {
                     const editEmbed = new Discord.MessageEmbed()
-                    .setColor('#FBD6C6')
+                    .setColor('#6cd3eb')
                     .setTitle('Among Us Lobby - hosted by "' + user.username + '"')
                     .setDescription('This game has ended.')
                     .setThumbnail(bot.user.avatarURL)
