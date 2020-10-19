@@ -10,6 +10,7 @@ module.exports.run = async (bot, msg, args) => {
     { name: 'among setup <hostRoleId> <voiceChannelId>', value: 'Setup a server with the host role and voice channel ID.' },
     { name: 'among edit <role/channel> <hostRoleId/voiceChannelId>', value: 'Edit the host role or voice channel ID.' },
     { name: 'among lobby <code> <region: NA/EU/ASIA> <map: TheSkeld/MiraHQ/Polus> <impostors: 1/2/3>  <confirmEjects: on/off> <visualTasks: on/off>', value: 'Post a lobby message.'},
+    { name: 'among muteminion', value: 'Create an embed you can use to mute and unmute the voice channel using reactions.'},
     { name: 'among ghostping', value: 'Ghostping whereever you send the message!' },
     { name: 'among mute', value: 'Mute everyone in the specified Among Us voice channel.' },
     { name: 'among unmute', value: 'Unmute everyone in the specified Among Us voice channel.' },

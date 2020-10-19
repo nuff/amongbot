@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const embeds = require('../../utils/embed.js');
-const main = require('../../bot.js');
+const botjs = require('../../bot.js');
+const currentGames = botjs.currentGames;
 
 module.exports.run = async (bot, msg, args) => {
     var map = "";
@@ -98,7 +99,7 @@ module.exports.run = async (bot, msg, args) => {
     message.react("⬆️");
     message.react("⬇️");
     message.react("⏹️");
-    main.push([message.id, msg.author.id, 0, args[0], args[1], map, args[3], ejects, tasks]);
+    currentGames.push([message.id, msg.author.id, 0, args[0], args[1], map, args[3], ejects, tasks]);
   });
 };
 

@@ -1,14 +1,19 @@
 const Discord = require("discord.js");
 const { config } = require("dotenv");
-const version = '1.2';
+const version = '1.3';
 const fs = require('fs');
+var jt = require('json-toolkit');
 const botSettings = JSON.parse(fs.readFileSync('./botSettings.json'));
 const bot = new Discord.Client({disableEveryone: false});
 bot.commands = new Discord.Collection();
 var prefix = botSettings.prefix;
 config({ path: __dirname + "/.env" });
+
 var currentGames = [];
-module.exports = currentGames;
+var muteMinions = [];
+
+exports.currentGames = currentGames;
+exports.muteMinions = muteMinions;
 
 fs.readdir("./cmds/", (err) => {
     if (err) console.error(err);
@@ -113,7 +118,62 @@ bot.on('messageReactionAdd', (reaction, user) => {
         }); 
     }
 
+    if (emoji.name == '🟥') {
+        muteMinions.forEach(minion => {
+            if(minion[0] === message.id) {
+                if(minion[1] === user.id) {
+                    jt.parseFile('servers/' + message.guild.id + '.json', (error, data) => {
+                        if(error) {
+                          console.log(error);
+                          return;
+                        }
+                        const channel = message.guild.channels.cache.find(c => c.id === data[1]);
+                        channel.members.forEach(member => { member.voice.setMute(true); });
+                    });
+                }
+                message.reactions.resolve(emoji.name).users.remove(user.id);
+            }
+        });
+    }
+
+    if (emoji.name == '🟩') {
+        muteMinions.forEach(minion => {
+            if(minion[0] === message.id) {
+                if(minion[1] === user.id) {
+                    jt.parseFile('servers/' + message.guild.id + '.json', (error, data) => {
+                        if(error) {
+                          console.log(error);
+                          return;
+                        }
+                        const channel = message.guild.channels.cache.find(c => c.id === data[1]);
+                        channel.members.forEach(member => { member.voice.setMute(false); });
+                    });
+                }
+                message.reactions.resolve(emoji.name).users.remove(user.id);
+            }
+        });
+    }
+
     if (emoji.name == '⏹️') {
+        muteMinions.forEach(minion => {
+            if(minion[0] === message.id) {
+                if(minion[1] === user.id) {
+                    const minionEmbed = new Discord.MessageEmbed()
+                    .setColor('#FBD6C6')
+                    .setTitle('Mute Minion | summoned by "' + user.username + '"')
+                    .setDescription('This minion has been killed.')
+                    .setThumbnail(bot.user.avatarURL)
+                    .setTimestamp()
+                    .setFooter('© amongbot 2020', bot.user.avatarURL);
+                    message.edit(minionEmbed);
+                    message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+                    var newArr = muteMinions.filter(item => item !== minion);
+                    muteMinions = newArr;
+                    return;
+                }
+            }
+        })
+
         //game: [messageId, hostId]
         currentGames.forEach(game => {
             if(game[0] === message.id) {
@@ -129,7 +189,6 @@ bot.on('messageReactionAdd', (reaction, user) => {
                     message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
                     var newArr = currentGames.filter(item => item !== game);
                     currentGames = newArr;
-                    console.log(currentGames);
                 } else {
                     message.reactions.resolve(emoji.name).users.remove(user.id);
                 }
