@@ -95,6 +95,6 @@ module.exports.run = async (bot, msg, args) => {
 module.exports.help = {
   name: "edit",
   arguments: "<role/channel> <hostRoleId/voiceChannelId>",
-  description: "",
-  category: ""
+  description: "Edit the host role or voice channel ID.",
+  category: "admin"
 }

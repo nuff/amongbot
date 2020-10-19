@@ -65,6 +65,6 @@ module.exports.run = async (bot, msg, args) => {
 module.exports.help = {
   name: "setup",
   arguments: "<hostRoleId> <voiceChannelId>",
-  description: "",
-  category: ""
+  description: "Setup a server with the host role and voice channel ID.",
+  category: "admin"
 }

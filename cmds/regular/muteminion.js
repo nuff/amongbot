@@ -22,7 +22,7 @@ module.exports.run = async (bot, msg, args) => {
             msg.delete();
 
             const minionEmbed = new Discord.MessageEmbed()
-            .setColor('#FBD6C6')
+            .setColor('#6cd3eb')
             .setTitle('Mute Minion | summoned by "' + msg.author.username + '"')
             .setThumbnail(bot.user.avatarURL)
             .addFields(

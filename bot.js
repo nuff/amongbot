@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const { config } = require("dotenv");
-const version = '1.3';
+const version = '1.4';
 const fs = require('fs');
 var jt = require('json-toolkit');
 const botSettings = JSON.parse(fs.readFileSync('./botSettings.json'));

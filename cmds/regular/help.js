@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 
 module.exports.run = async (bot, msg, args) => {
   const helpEmbed = new Discord.MessageEmbed()
-	.setColor('#FBD6C6')
+	.setColor('#6cd3eb')
 	.setTitle('amongbot')
 	.setDescription('A list of all commands')
 	.setThumbnail(bot.user.avatarURL)
