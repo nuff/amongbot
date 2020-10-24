@@ -1,4 +1,4 @@
-# amongbot v1.4
+# amongbot v1.5
 among us discord bot project  
 
 # contributors
