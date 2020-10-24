@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const { config } = require("dotenv");
-const version = '1.4';
+const version = '1.5';
 const fs = require('fs');
 var jt = require('json-toolkit');
 const botSettings = JSON.parse(fs.readFileSync('./botSettings.json'));
@@ -48,7 +48,7 @@ bot.on('messageReactionAdd', (reaction, user) => {
 
     if(user.bot) return;
 
-    if (emoji.name == '⬆️') {
+    /*if (emoji.name == '⬆️') {
         currentGames.forEach(game => {
             if(game[0] === message.id) {
                 if(game[1] === user.id && game[2] >= 0 && game[2] <= 10) {
@@ -116,7 +116,7 @@ bot.on('messageReactionAdd', (reaction, user) => {
                 message.reactions.resolve(emoji.name).users.remove(user.id);
             }
         }); 
-    }
+    }*/
 
     if (emoji.name == '🔴') {
         muteMinions.forEach(minion => {
@@ -195,7 +195,7 @@ bot.on('messageReactionAdd', (reaction, user) => {
                     message.reactions.resolve(emoji.name).users.remove(user.id);
                 }
             }
-        }); 
+        });
     }
 });
 
