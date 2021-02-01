@@ -3,7 +3,7 @@ among us discord bot project
 
 # contributors
 
-github/wtf6yte - founder & development  
+github/nuff - founder & development  
 
 # invite link
 
